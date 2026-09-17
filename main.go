@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"sharmiaalono/goose/lib/goose/dialect"
+)
 
 func main() {
-	fmt.Println("Hello, Bounty Hunter!")
+	fmt.Println("Goose SQLite PRAGMA Validator initialized.")
+	stmt := "PRAGMA journal_mode = WAL;"
+	err := dialect.ValidateSQLiteStatement(stmt, true)
+	if err != nil {
+		fmt.Println("Detected invalid transactional PRAGMA:", err)
+	}
 }
